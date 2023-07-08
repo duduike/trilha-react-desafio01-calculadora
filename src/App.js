@@ -10,11 +10,20 @@ const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
   const [firstNumber, setFirstNumber] = useState('0');
   const [operation, setOperation] = useState('');
+  const [decimalPressed, setDecimalPressed] = useState(false);
 
   const handleOnClear = () => {
     setCurrentNumber('0')
     setFirstNumber('0')
     setOperation('')
+    setDecimalPressed(false);
+  };
+
+  const handleDecimal = () => {
+    if (!decimalPressed) {
+      setCurrentNumber(prev => `${prev}.`);
+      setDecimalPressed(true);
+    }
   };
 
   const handleAddNumber = (num) => {
@@ -108,7 +117,7 @@ const App = () => {
           <Button label="x" onClick={handleMultiplyNumbers}/>
           <Button label="/" onClick={handleDivisionNumbers}/>
           <Button label="c" onClick={handleOnClear}/>
-          <Button label="."/>
+          <Button label="." onClick={handleDecimal}/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')}/>
